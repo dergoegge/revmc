@@ -1,0 +1,23 @@
+[package]
+name = "revmc-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+revmc = { path = "..", workspace = true, features = ["llvm-prefer-dynamic"] }
+eyre.workspace = true
+
+[build-dependencies]
+revmc-build.workspace = true
+
+[[bin]]
+name = "host_against_interpreter"
+path = "fuzz_targets/host_against_interpreter.rs"
+test = false
+doc = false
+bench = false
